@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def toFixedMax(y_max, digits=0):
     return f"{y_max:.{digits}f}"
 
@@ -11,8 +12,10 @@ def toFixedMin(y_min, digits=0):
 def toFixed(my, digits=0):
     return f"{my :.{digits}f}"
 
+
 def out_yellow(text):
-    print("\033[33m {}" .format(text))
+    print("\033[33m {}".format(text))
+
 
 N = 4
 m = 3
@@ -163,10 +166,10 @@ for i in range(N):
     clear_matrix = np.copy(initialMatrix)
     clear_matrix = np.array(clear_matrix)
     print(f"{clear_matrix} \n")
-# can be used ( replace ), but the numbers will be large even after 3 digits
+    # can be used ( replace ), but the numbers will be large even after 3 digits
     massive_p.append(np.linalg.det(clear_matrix) / det_m)
 
-print("-"*20 + "Рівняння регресії" + "-"*20)
+print("-" * 20 + "Рівняння регресії" + "-" * 20)
 print(
     "y = "
     f"{round(massive_p[0], 2)}"
@@ -176,30 +179,34 @@ print(
 )
 
 comparison = [massive_p[0] + massive_p[1] * i[0] + massive_p[2] * i[1] + massive_p[3] * i[2] for i in aft]
-print("-"*25 + "Compare" + "-"*25)
+print("-" * 25 + "Compare" + "-" * 25)
 print(np.vstack((comparison, y_mean)))
 
-print("-"*20 + "factors by Y" + "-"*20)
+print("-" * 20 + "factors by Y" + "-" * 20)
 print((np.hstack((factors, y))))
 
-print("-"*25 + "y_std" + "-"*25)
+print("-" * 25 + "y_std" + "-" * 25)
 for i in y_through_std:
     print('%.3f' % i)
 
-print("-"*25 + "values" + "-"*25)
+print("-" * 25 + "values" + "-" * 25)
 print(
-    f"g_m_p = {round(g_massive_p, 5)} \n " 
-    f"f1 = {f1} \n" 
+    f"g_m_p = {round(g_massive_p, 5)} \n "
+    f"f1 = {f1} \n"
     f"f2 = {f2}"
 )
 
-print("-"*15 + "determining the variance" + "-"*15)
+print("-" * 15 + "determining the variance" + "-" * 15)
 if g_massive_p < value_a:
     print("Дисперсія однорідна")
+elif g_massive_p > value_a:
+    m += 1
+    print(f" додаємо 1 до m щоб дисперсія стада однорідною. \n m + 1 = {m}, "
+          "Дисперсія однорідна")
 else:
     print("Дисперсія неоднорідна")
 
-print("-"*25 + "f3" + "-"*25)
+print("-" * 25 + "f3" + "-" * 25)
 print(f"f3 = {f1 * f2}")
 
 dev = ""
@@ -215,15 +222,15 @@ for i in range(N):
         to_save.append(0)
     if i != 3 and added:
         dev = dev + " + "
-print("-"*10 + "t, Рівняння регресії, comparison by y_mean" + "-"*10)
-print("-"*5 + "t" + "-"*5)
+print("-" * 10 + "t, Рівняння регресії, comparison by y_mean" + "-" * 10)
+print("-" * 5 + "t" + "-" * 5)
 for i in t:
     print('%.3f' % i)
 
-print("-"*5 + "рівняння" + "-"*5)
+print("-" * 5 + "рівняння" + "-" * 5)
 print(f"y = {dev}")
 
-print("-"*5 + "comparison" + "-"*5)
+print("-" * 5 + "comparison" + "-" * 5)
 d = to_save.count(1)
 
 for i in range(N):
@@ -232,7 +239,7 @@ for i in range(N):
 comparison = [massive_p[0] + massive_p[1] * i[0] + massive_p[2] * i[1] + massive_p[3] * i[2] for i in aft]
 print(np.vstack((comparison, y_mean)))
 
-out_yellow("-"*25 + "Перевірка" + "-"*25)
+out_yellow("-" * 25 + "Перевірка" + "-" * 25)
 print(f"d = {d}")
 if d == N:
     print("Отже рівняння регресії адекватно за критерієм ")
